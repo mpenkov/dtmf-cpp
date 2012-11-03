@@ -48,7 +48,21 @@ To quickly plot the waveform stored in an AU file:
 
 This requires matplotlib.  Alternatively, use an editor like http://audacity.sourceforge.net/
 
+Result:
+
+![Alt text](https://github.com/mpenkov/dtmf-cpp/blob/master/scripts/plot_au.png)
+
 Goertzel Output Plotter
 -----------------------
 
+If you build the detector in debug mode:
 
+    cd ..
+    make clean
+    make debug
+
+Then you can visualize the strength of each magnitude at each frame:
+
+    ../bin/detect-au.out test.au | python plot_T.py
+
+![Alt text](https://github.com/mpenkov/dtmf-cpp/blob/master/scripts/plot_T.png)
