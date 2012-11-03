@@ -8,6 +8,10 @@
 #include <cassert>
 #include "DtmfDetector.hpp"
 
+#if DEBUG
+#include <cstdio>
+#endif
+
 // This is the same function as in DtmfGenerator.cpp
 static inline INT32 MPY48SR(INT16 o16, INT32 o32)
 {
@@ -346,7 +350,11 @@ char DtmfDetector::DTMF_detection(INT16 short_array_samples[])
     goertzel_filter(CONSTANTS[14], CONSTANTS[15], internalArray, &T[14], &T[15], SAMPLES);
     goertzel_filter(CONSTANTS[16], CONSTANTS[17], internalArray, &T[16], &T[17], SAMPLES);
 
-
+#if DEBUG
+    for (ii = 0; ii < COEFF_NUMBER; ++ii)
+        printf("%d ", T[ii]);
+    printf("\n");
+#endif
 
     INT32 Row = 0;
     INT32 Temp = 0;

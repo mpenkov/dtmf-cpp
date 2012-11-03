@@ -47,3 +47,8 @@ To quickly plot the waveform stored in an AU file:
     python plot_au.py test.au
 
 This requires matplotlib.  Alternatively, use an editor like http://audacity.sourceforge.net/
+
+Goertzel Output Plotter
+-----------------------
+
+

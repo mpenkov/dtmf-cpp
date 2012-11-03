@@ -14,12 +14,15 @@ OBJ=$(patsubst %.cpp,obj/%.o,$(SRC))
 #
 .SECONDARY:
 	
+debug: CFLAGS += -DDEBUG=1
+debug: all
 
 #
 # $< is the first dependency in the dependency list
 # $@ is the target name
 #
 all: dirs $(addprefix bin/, $(EXE)) tags
+
 
 dirs:
 	mkdir -p obj
