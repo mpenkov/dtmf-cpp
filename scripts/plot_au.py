@@ -1,6 +1,5 @@
 """Plot the waveform of the signal in the specified AU file."""
 
-import matplotlib.pyplot as plt
 import sys
 from struct import unpack, calcsize
 
@@ -16,6 +15,7 @@ def read_au(fname):
     return sample_rate, samples
 
 if __name__ == "__main__":
+    import matplotlib.pyplot as plt
     sample_rate, samples = read_au(sys.argv[1])
     plt.title("%s (%dHz)" % (sys.argv[1], sample_rate))
     plt.plot(range(len(samples)), samples)
