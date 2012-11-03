@@ -12,6 +12,7 @@
 #if !_BASE_TYPES_
 #define _BASE_TYPES_ 1
 
+// http://stackoverflow.com/questions/12863738/what-is-this-c-code-attempting-to-achieve
 template<int, int, int, int> class Types;
 template <> class Types<5, 4, 2, 1>
 {

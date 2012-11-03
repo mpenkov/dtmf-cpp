@@ -25,16 +25,36 @@ typedef Types<sizeof(long int), sizeof(int), sizeof(short int), sizeof(char)>::U
 
 class DtmfGenerator
 {
-
+    // The coefficients for each of the 8 frequencies.
+    // The four low frequencies come first, followed by the four high
+    // frequencies.
+    // The coefficients are fixed for a sampling rate of 8KHz.
     static const INT16 tempCoeff[8];
+    // Number of buffers a single tone should occupy.
+    // Initialized in the constructor.
     INT32 countDurationPushButton;
+    // Number of buffers a single silence should occupy.
+    // Initialized in the constructor.
     INT32 countDurationPause;
+    // Number of buffers we have to write to complete the current tone.
     INT32 tempCountDurationPushButton;
+    // Number of buffers we have to write to complete the current silence.
     INT32 tempCountDurationPause;
+    // Set to 0 while there is still something left to output, i.e. not all
+    // of the tones in pushDialButtons have been completely output.  This
+    // means: "please wait until I'm done before sending me more input."
+    // Set to 1 when we've output everything we've been asked to.  This
+    // means: "please give me more input".
     INT32 readyFlag;
+    // A fixed-size array of dial tones to generate.
     char pushDialButtons[20];
+    // The number of tones we still have to generate (gets decremented
+    // each time a tone is generated).
     UINT32 countLengthDialButtonsArray;
+    // The index of the current tone we're generating (gets incremented
+    // each time a tone is generated).
     UINT32 count;
+    // The size of the output buffer we will be writing to.
     INT32 sizeOfFrame;
 
     short tempCoeff1, tempCoeff2;
@@ -48,6 +68,12 @@ public:
     ~DtmfGenerator();
 
     //That function will be run on each outcoming frame
+    //
+    // This function performs the actual generation of the signal.
+    //
+    // The size of out (the buffer to which the generated signal will 
+    // be output to) is SizeOfFrame (specified in constructor.  Does
+    // nothing if ready_flag is non-zero.
     void dtmfGenerating(INT16 out[]);
 
     // If transmitNewDialButtonsArray return 1 then the dialButtonsArray will be transmitted
@@ -107,5 +133,3 @@ volatile int break_current_action = 0;
 */
 
 #endif
-
-
